@@ -1,6 +1,7 @@
 package com.haohaohu.springbootdemo.util;
 
 import cn.hutool.core.lang.Snowflake;
+import cn.hutool.core.util.HexUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import org.slf4j.Logger;
@@ -55,8 +56,14 @@ public class SnowFlakeUtil {
         //
         //System.out.println(snowflakeStr);
 
-        decode("1676211477814796290");
+        //decode("1676517778016530433");//2023-07-25 18:12:51
 
-        decode("1676213006516449282");
+        //2023-07-26 16:23:02
+
+        decode("1668055320910184449");
+
+        //String data = "33 E8 BF 9B E5 87 BA E7 B1 BB E5 9E 8B E9 94 99 E8 AF AF EF BC 9A E8 BF 9B E5 87 BA E7 B1 BB E5 9E 8B E4 B8 BA EF BC 88 E8 BF 9B EF BC 8C E5 87 BA EF BC 89 E3 80 82";
+        //String s = HexUtil.decodeHexStr(StrUtil.cleanBlank(data));
+        //System.out.println(s);
     }
 }

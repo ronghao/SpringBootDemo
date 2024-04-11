@@ -2,6 +2,10 @@ package com.haohaohu.springbootdemo.util;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.HexUtil;
+import cn.hutool.crypto.Mode;
+import cn.hutool.crypto.Padding;
+import cn.hutool.crypto.SecureUtil;
+import cn.hutool.crypto.symmetric.DES;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -325,22 +329,22 @@ public class HexTool {
         //String index = HexTool.lowHigh(i + 1, 2, false);
         //System.out.println(index);
 
-        String index = "889008139d0617";
-        Date date1 = toDate(index);
-        System.out.println(date1.getTime());
-
-        System.out.println(DateUtil.format(date1, "yyyy-MM-dd HH:mm:ss"));
-
-        //long l = HexUtil.hexToLong("98B70E11100314");
-        //String s = TimeScale(l.get);
-        //System.out.println(s);
-
-        //String timeStr = HexTool.getTimeStr(System.currentTimeMillis() / 1000);
-        //System.out.println(timeStr);
-
-        Long time = 1687936637551L;
-        String timeStr1 = HexTool.toCP56Time2a(time);
-        System.out.println(timeStr1);
+        //String index = "889008139d0617";
+        //Date date1 = toDate(index);
+        //System.out.println(date1.getTime());
+        //
+        //System.out.println(DateUtil.format(date1, "yyyy-MM-dd HH:mm:ss"));
+        //
+        ////long l = HexUtil.hexToLong("98B70E11100314");
+        ////String s = TimeScale(l.get);
+        ////System.out.println(s);
+        //
+        ////String timeStr = HexTool.getTimeStr(System.currentTimeMillis() / 1000);
+        ////System.out.println(timeStr);
+        //
+        //Long time = 1687936637551L;
+        //String timeStr1 = HexTool.toCP56Time2a(time);
+        //System.out.println(timeStr1);
 
         //int ffff = HexTool.hexToInt("ffff");
         //System.out.println(ffff);
@@ -353,5 +357,17 @@ public class HexTool {
         //
         //int f05500001 = HexTool.hexToInt("DOFB0100");
         //int f0550000 = HexUtil.hexToInt("0c");
+
+        DES des = new DES(Mode.CBC, Padding.PKCS5Padding, "IKWLgczsuSwpDhKjeH8YLa4Bd7EU5s35".getBytes(), "IKWLgczs".getBytes());
+
+        //Des3
+        //DES des = SecureUtil.des("IKWLgczsuSwpDhKjeH8YLa4Bd7EU5s35".getBytes());
+        String s = des.encryptHex("5083b1eeb62549a58685b4628bac2513").toUpperCase();
+        System.out.println(s);
+
+        //edd2a2d4224d77cb249752220e9cce85e969f1ac196067741c7164b549d032d1e02054fac615e3b4
+        //2AE319298CE42EF9F2AFF9A6428600F633F1FB48815BA3B655C72FF489861B452A4CB554A074C137
+
+
     }
 }

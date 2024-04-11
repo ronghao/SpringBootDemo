@@ -1,11 +1,20 @@
 package com.haohaohu.springbootdemo.util;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.util.HexUtil;
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.util.URLUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.util.Date;
+import java.util.UUID;
 
 /**
  * @author haohao(ronghao3508 gmail.com) on 2021/12/1 13:06
@@ -44,14 +53,14 @@ public class SnowFlakeUtil {
         long id2 = snowflake.nextId();
         System.out.println(id >> 22);
         System.out.println((id >> 22) + Snowflake.DEFAULT_TWEPOCH);
-        System.out.println("转换：" +TimeTools.getTime_yyyyMMddHHmmss((id >> 22) + Snowflake.DEFAULT_TWEPOCH));
+        System.out.println("转换：" + TimeTools.getTime_yyyyMMddHHmmss((id >> 22) + Snowflake.DEFAULT_TWEPOCH));
         System.out.println(id2);
         System.out.println(id2 >> 22);
         System.out.println((id2 >> 22) + Snowflake.DEFAULT_TWEPOCH);
         System.out.println("当前：" + TimeTools.getTime_yyyyMMddHHmmss((id2 >> 22) + Snowflake.DEFAULT_TWEPOCH));
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedEncodingException {
         //String snowflakeStr = SnowFlakeUtil.getSnowflakeStr();
         //
         //System.out.println(snowflakeStr);
@@ -60,10 +69,31 @@ public class SnowFlakeUtil {
 
         //2023-07-26 16:23:02
 
-        decode("1668055320910184449");
+        //1741748341845069826  2024-01-01 17:08:59
+        decode("1722106446760210434");
+        //
+        ////String data = "33 E8 BF 9B E5 87 BA E7 B1 BB E5 9E 8B E9 94 99 E8 AF AF EF BC 9A E8 BF 9B E5 87 BA E7 B1 BB E5 9E 8B E4 B8 BA EF BC 88 E8 BF 9B EF BC 8C E5 87 BA EF BC 89 E3 80 82";
+        ////String s = HexUtil.decodeHexStr(StrUtil.cleanBlank(data));
+        ////System.out.println(s);
+        //
+        //String data = StrUtil.format("{}{}{}","1","1"+StrUtil.toStringOrNull(null));
+        //System.out.println(data);
 
-        //String data = "33 E8 BF 9B E5 87 BA E7 B1 BB E5 9E 8B E9 94 99 E8 AF AF EF BC 9A E8 BF 9B E5 87 BA E7 B1 BB E5 9E 8B E4 B8 BA EF BC 88 E8 BF 9B EF BC 8C E5 87 BA EF BC 89 E3 80 82";
-        //String s = HexUtil.decodeHexStr(StrUtil.cleanBlank(data));
-        //System.out.println(s);
+        //Date date = DateUtil.beginOfMonth(DateUtil.offsetMonth(new Date(), 0 - 10)).toJdkDate();
+        //System.out.println(DateUtil.formatDate(date));
+
+        //String licence = UUID.randomUUID().toString().replace("-", "").substring(10, 17).toUpperCase();
+        //
+        //System.out.println(licence);
+        //
+        //String licence1 = RandomUtil.randomString("0123456789ABCDEF", 7);
+        //System.out.println(licence1);
+
+        String s = HexUtil.toHex(Long.valueOf("1770284016428228609"));
+        System.out.println(s);
+
+
+
+
     }
 }

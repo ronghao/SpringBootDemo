@@ -1,9 +1,11 @@
 package com.haohaohu.springbootdemo.util;
 
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.symmetric.AES;
 import com.alibaba.fastjson.JSON;
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.springframework.util.Base64Utils;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -145,17 +147,42 @@ public class Encode {
         return md5str.toString().toUpperCase();
     }
 
+    public static boolean checkLength(String scanContent) {
+        int length = scanContent.length();
+        if (length == 18 || length == 19) {
+            return StrUtil.startWith(scanContent, "9") || StrUtil.startWith(scanContent, "8") || StrUtil.startWith(scanContent, "3");
+        } else {
+            return false;
+        }
+    }
+
 
     public static void main(String[] args) {
-        String data = "{\"body\":\"\\u6d4b\\u8bd5\\u5185\\u5bb9\",\"out_trade_no\":\"29152154523069546710\",\"total_fee\":\"1\",\"user_no\":\"123456798\",\"user_name\":\"test\",\"return_url\":null,\"notify_url\":\"https:\\/\\/notify.zhizhixao.com\\/return.html\",\"pay_type\":1}";
-        String s = aesEncode(data);
-        System.out.println(s);
-        String data1 = "partner1" + s + "weiweixiao";
-        String md5 = getMD5(data1);
-        System.out.println(md5);
 
-        String data3 = "U9qTuhXZ7nrQtNkfNPb6KpozO38WQ8oBBhNbaHfJSbfh7pqn4IYYoeUQC4ujAcuDmyTTA5PF0XV963qkM0MbhhwRXAymJfCWo5MYN5No/dW2FmK+bf1cLfS3lD5+gPURF7U1yTtS3VrCJrmSdcdMqmJy5yepLTCTkefBbhcKqZy54+xWIasdZ+BlqDO2PutSQOyDjXeGGfYso2FLvUb7Bv/EFSlTJdpeCobxGo7Aw8vkM93Fe7YuKtnBRS7IHOAnmx97J3PEeBgieGh047yv3U5ouKy/t+a+a5hTftkxnDE=";
-        String s1 = aesDecode(data3);
-        System.out.println(s1);
+        boolean b = checkLength("35095211170987258511");
+        System.out.println(b);
+        //String data = "{\"body\":\"\\u6d4b\\u8bd5\\u5185\\u5bb9\",\"out_trade_no\":\"29152154523069546710\",\"total_fee\":\"1\",\"user_no\":\"123456798\",\"user_name\":\"test\",\"return_url\":null,\"notify_url\":\"https:\\/\\/notify.zhizhixao.com\\/return.html\",\"pay_type\":1}";
+        //String s = aesEncode(data);
+        //System.out.println(s);
+        //String data1 = "partner1" + s + "weiweixiao";
+        //String md5 = getMD5(data1);
+        //System.out.println(md5);
+        //
+        //String data3 = "U9qTuhXZ7nrQtNkfNPb6KpozO38WQ8oBBhNbaHfJSbfh7pqn4IYYoeUQC4ujAcuDmyTTA5PF0XV963qkM0MbhhwRXAymJfCWo5MYN5No/dW2FmK+bf1cLfS3lD5+gPURF7U1yTtS3VrCJrmSdcdMqmJy5yepLTCTkefBbhcKqZy54+xWIasdZ+BlqDO2PutSQOyDjXeGGfYso2FLvUb7Bv/EFSlTJdpeCobxGo7Aw8vkM93Fe7YuKtnBRS7IHOAnmx97J3PEeBgieGh047yv3U5ouKy/t+a+a5hTftkxnDE=";
+        //String s1 = aesDecode(data3);
+        //System.out.println(s1);
+
+        //String s2 = cn.hutool.core.codec.Base64.decodeStr("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIyIiwiZXhwIjoxNzAxODU2MzQ1LCJzdWIiOiJ0ZXN0IiwiaWF0IjoxNzAxODUyNzQ1fQ.7lwYRODAKnsf_jb_37J9eO5LbitVIkzXvqwLs4qqKK8");
+        //System.out.println(s2);
+        //
+        //String s = Base64Utils.encodeToString("云A1K79T".getBytes());
+        //System.out.println(s);
+
+        //String sn = "1111";
+        //String topic = StrUtil.format("device/{}/message/down/reboot_dev", sn);
+        //String snowflakeStr = SnowFlakeUtil.getSnowflakeStr();
+        //String content = StrUtil.format("{\"id\":\"{}\",\"sn\":\"{}\",\"name\":\"reboot_dev\",\"version\":\"1.0\",\"timestamp\":{},\"payload\":{\"type\":\"reboot_dev\",\"body\":{}}}", snowflakeStr, sn, System.currentTimeMillis() / 1000);
+        //System.out.println(topic);
+        //System.out.println(content);
     }
 }
